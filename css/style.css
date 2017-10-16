@@ -1,0 +1,12 @@
+/*.steps-indicator:before {
+	background-color: #08f;
+}*/
+/*.steps-indicator li a:before {
+  background-color: #08f;
+}*/
+.steps-indicator li.done a:before {
+  background-color: #08f !important;
+}
+.steps-indicator li.current a:before {
+  background-color: #08f !important;
+}
