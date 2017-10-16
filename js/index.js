@@ -3,6 +3,7 @@ angular.module('wizard-sample', ['mgo-angular-wizard'])
 
         $scope.canExit = true;
         $scope.stepActive = true;
+        $scope.indicatorsPosition='top';
 
         $scope.finished = function() {
             alert("Wizard finished :)");

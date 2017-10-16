@@ -10,3 +10,7 @@
 .steps-indicator li.current a:before {
   background-color: #08f !important;
 }
+
+.steps-indicator {
+  padding-bottom: 5em;
+}
