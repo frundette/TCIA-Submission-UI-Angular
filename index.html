@@ -24,48 +24,44 @@
 
           <wz-step wz-title="Login">
             
-              <form>
-                  <div class="form-group">
-                    <label for="usernameInput">Username</label>
-                    <input type="text" class="form-control" id='usernameInput' style="max-width: 300px;"/>
+            <form>
+                <div class="form-group">
+                  <label for="usernameInput">Username</label>
+                  <input type="text" class="form-control" id='usernameInput' style="max-width: 300px;"/>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" class="form-control" id='passwordInput' style="max-width: 300px;"/>
                   </div>
-                  <div class="form-group">
-                      <label for="passwordInput">Password</label>
-                      <input type="password" class="form-control" id='passwordInput' style="max-width: 300px;"/>
-                    </div>
-              </form>
- 
-      
+            </form>
 
             <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
 
-          
           </wz-step>
 
           <wz-step wz-title="Configure">
-            
              
-              <p>Fill out this CSV template and save it on your computer.  
-                Our software will use this information to determine which Collection your patients belong in, 
-                and to replace your patient IDs and dates with anonymized ones.</p>
-              
-              <p>After filling out the template, import the file: <input type="button" value="Browse"/></p>
-  
-              <p>Template file selected:    c:\Downloads\template.csv</p>
+            <p>Fill out <a href='tcia-submission-template.csv'>this CSV template</a> and save it on your computer.  
+              Our software will use this information to determine which Collection your patients belong in, 
+              and to replace your patient IDs and dates with anonymized ones.</p>
             
-            <input type="button" wz-previous="logStep()" value="BACK" />
-            <input type="button" wz-next="logStep()" value="NEXT" />
+            <p>After filling out the template, import the file: <button type="button" class="btn btn-primary">Browse</button> </p>
+
+            <p>Template file selected:    c:\Downloads\template.csv</p>
+            
+            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
           </wz-step>
 
           <wz-step wz-title="Identify Data">
-            <h2>Identify Data</h2>
+            
             <p>Now locate the DICOM data you’d like to submit. You can send data that’s stored on your hard drive or connect to your PACS.</p>
             <p>Submit from hard drive: <input type="button" value="Browse"/></p>
             <p>OR</p>
             <p>Submit from PACS: <input type="button" value="Browse"/></p>
 
-            <input type="button" wz-previous="logStep()" value="BACK" />
-            <input type="button" wz-next="logStep()" value="NEXT" />
+            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
           </wz-step>
           <wz-step wz-title="Process Data">
             
@@ -77,8 +73,8 @@
               
             <p>Be sure to verify you have enough free space before you proceed!</p>
 
-            <input type="button" wz-previous="logStep()" value="BACK" />
-            <input type="button" wz-next="logStep()" value="NEXT" />
+            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
           </wz-step>
 
           <wz-step wz-title="Transfer to TCIA">
@@ -95,16 +91,16 @@
                 <li>Quarantined Series: 3</li>
             </ul>
                 
-            <input type="button" wz-previous="logStep()" value="BACK" />
-            <input type="button" wz-next="logStep()" value="NEXT" />
+            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
           </wz-step>
           <wz-step wz-title="Finished">
            
             <p>Thanks for submitting your data.  Here’s a submission report to provide to TCIA staff.</p>
-            <input type="button" wz-previous="logStep()" value="BACK" />
-            <input type="button" wz-next="logStep()" value="END" />
-            <!-- <input type="button" ng-click="goBack()" value="Click here to start again" />
-            <input type="button" wz-reset value="Click here to reset" /> -->
+
+            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary" value="END">END</button>
+
           </wz-step>
         </wizard>
       </section>
