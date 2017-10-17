@@ -3,7 +3,17 @@ angular.module('wizard-sample', ['mgo-angular-wizard'])
 
         $scope.canExit = true;
         $scope.stepActive = true;
-        $scope.indicatorsPosition='top';
+        
+
+        $scope.patientsReceived = 100;
+        $scope.studiesReceived = 320;
+        $scope.seriesReceived = 1432;
+        $scope.quarantinedSeries = 3;
+        $scope.templateFileLocation;
+        $scope.deIdentifiedFileLocation;
+
+
+
 
         $scope.finished = function() {
             alert("Wizard finished :)");

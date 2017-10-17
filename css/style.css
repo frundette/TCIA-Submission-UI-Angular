@@ -14,3 +14,7 @@
 .steps-indicator {
   padding-bottom: 5em;
 }
+
+.right {
+  float: right;
+}

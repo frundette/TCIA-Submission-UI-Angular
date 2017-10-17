@@ -34,7 +34,7 @@
                   </div>
             </form>
 
-            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
 
           </wz-step>
 
@@ -44,67 +44,66 @@
               Our software will use this information to determine which Collection your patients belong in, 
               and to replace your patient IDs and dates with anonymized ones.</p>
             
-            <p>After filling out the template, import the file: <button type="button" class="btn btn-primary">Browse</button> </p>
-
-            <p>Template file selected:    c:\Downloads\template.csv</p>
+            <p>After filling out the template, import the file: <input type="file" class="form-control" ng-model="templateFileLocation" /></p>
             
-            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
           </wz-step>
 
           <wz-step wz-title="Identify Data">
             
             <p>Now locate the DICOM data you’d like to submit. You can send data that’s stored on your hard drive or connect to your PACS.</p>
-            <p>Submit from hard drive: <input type="button" value="Browse"/></p>
+            <p>Submit from hard drive: <input type="file" class="form-control" multiple/></p>
             <p>OR</p>
             <p>Submit from PACS: <input type="button" value="Browse"/></p>
 
             <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
-            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
           </wz-step>
+
           <wz-step wz-title="Process Data">
             
             <p>You have selected to de-identify XXX Gbytes/Tbytes of data from your PACS/HardDisk.</p>
               
-            <p>Here is what will be de-identified:  <input type="button" value="Open Report"/></p>
+            <p>Here is what will be de-identified:  <button type="button" class="btn btn-primary">Open Report</button></p>
               
-            <p>Please select where you’d like the de-identified data to be saved: <input type="button" value="Browse"/> </p>
+            <p>Please select where you’d like the de-identified data to be saved: <input type="file" class="form-control" ng-model="deIdentifiedFileLocation"/> </p>
               
             <p>Be sure to verify you have enough free space before you proceed!</p>
 
-            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
-            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
+            <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
+            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
           </wz-step>
 
           <wz-step wz-title="Transfer to TCIA">
             
-            <p>Your data is now de-identified and stored at directory location.  
+            <p>Your data is now de-identified and stored at XXX.  
               You can review the contents to resolve any quarantines or check for other issues if you like.  </p>
                 
             <p>When you’re ready, press Next to transmit the following data to TCIA.  Any remaining quarantined files will not be sent.</p>
                 
             <ul>
-                <li>Patients Received:  100</li>
-                <li>Studies Received:  320 </li>
-                <li>Series Received:  1,432</li>
-                <li>Quarantined Series: 3</li>
+                <li>Patients Received:  {{patientsReceived}}</li>
+                <li>Studies Received:  {{studiesReceived}} </li>
+                <li>Series Received:  {{seriesReceived}}</li>
+                <li>Quarantined Series: {{quarantinedSeries}}</li>
             </ul>
                 
             <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
-            <button type="button" wz-next="logStep()" class="btn btn-primary">NEXT</button>
+            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
           </wz-step>
+
           <wz-step wz-title="Finished">
            
             <p>Thanks for submitting your data.  Here’s a submission report to provide to TCIA staff.</p>
 
-            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
-            <button type="button" wz-next="logStep()" class="btn btn-primary" value="END">END</button>
+            <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
+            <button type="button" wz-next="logStep()" class="btn btn-primary right" value="END">END</button>
 
           </wz-step>
         </wizard>
       </section>
     </div>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
-<!-- <script src='https://cdn.jsdelivr.net/angular.wizard/latest/angular-wizard.min.js'></script> -->
 <script src='angular-wizard/angular-wizard.js'></script>
 <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js'></script>
 <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js'></script>
