@@ -3,16 +3,28 @@ angular.module('wizard-sample', ['mgo-angular-wizard'])
 
         $scope.canExit = true;
         $scope.stepActive = true;
-        
 
-        $scope.patientsReceived = 100;
-        $scope.studiesReceived = 320;
-        $scope.seriesReceived = 1432;
-        $scope.quarantinedSeries = 3;
+        $scope.user = {
+            username: '',
+            password: ''
+        };
+
+        $scope.received = {
+            patientsReceived: 100,
+            studiesReceived: 320,
+            seriesReceived: 1432,
+            quarantinedSeries: 3
+        };
+
+
         $scope.templateFileLocation;
         $scope.deIdentifiedFileLocation;
 
 
+        $scope.loginValidation = function(){
+            //TODO: Move into seperate service file
+            return ($scope.user.username === 'tcia' && $scope.user.password === 'password')
+        };
 
 
         $scope.finished = function() {
@@ -36,7 +48,7 @@ angular.module('wizard-sample', ['mgo-angular-wizard'])
         };
         $scope.stepToggle = function() {
             $scope.stepActive = !$scope.stepActive;
-        }
+        };
         $scope.exitValidation = function() {
             return $scope.canExit;
         };

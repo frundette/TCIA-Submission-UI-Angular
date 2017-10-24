@@ -21,16 +21,16 @@
       <section id="main_content" class="inner main-inner" ng-app="wizard-sample" ng-controller="WizardCtrl">
         <wizard on-finish="finished()">
 
-          <wz-step wz-title="Login">
+          <wz-step wz-title="Login" canexit="loginValidation">
             
             <form>
                 <div class="form-group">
                   <label for="usernameInput">Username</label>
-                  <input type="text" class="form-control" id='usernameInput' style="max-width: 300px;"/>
+                  <input type="text" class="form-control" id='usernameInput' ng-model="user.username" style="max-width: 300px;"/>
                 </div>
                 <div class="form-group">
                     <label for="passwordInput">Password</label>
-                    <input type="password" class="form-control" id='passwordInput' style="max-width: 300px;"/>
+                    <input type="password" class="form-control" id='passwordInput' ng-model="user.password" style="max-width: 300px;"/>
                   </div>
             </form>
 
@@ -44,7 +44,7 @@
               Our software will use this information to determine which Collection your patients belong in, 
               and to replace your patient IDs and dates with anonymized ones.</p>
             
-            <p>After filling out the template, import the file: <input type="file" class="form-control" ng-model="templateFileLocation" /></p>
+            <p>After filling out the template, import the file: <input type="file" accept=".csv" class="form-control" ng-model="templateFileLocation" /></p>
             
             <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
           </wz-step>
@@ -67,7 +67,9 @@
             <p>Here is what will be de-identified:  <button type="button" class="btn btn-primary">Open Report</button></p>
               
             <p>Please select where you’d like the de-identified data to be saved: <input type="file" class="form-control" ng-model="deIdentifiedFileLocation"/> </p>
-              
+
+            <p><input type="file" webkitdirectory mozdirectory msdirectory odirectory directory /></p>  multiple
+
             <p>Be sure to verify you have enough free space before you proceed!</p>
 
             <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
@@ -82,10 +84,10 @@
             <p>When you’re ready, press Next to transmit the following data to TCIA.  Any remaining quarantined files will not be sent.</p>
                 
             <ul>
-                <li>Patients Received:  {{patientsReceived}}</li>
-                <li>Studies Received:  {{studiesReceived}} </li>
-                <li>Series Received:  {{seriesReceived}}</li>
-                <li>Quarantined Series: {{quarantinedSeries}}</li>
+                <li>Patients Received:  {{received.patientsReceived}}</li>
+                <li>Studies Received:  {{received.studiesReceived}} </li>
+                <li>Series Received:  {{received.seriesReceived}}</li>
+                <li>Quarantined Series: {{received.quarantinedSeries}}</li>
             </ul>
                 
             <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
