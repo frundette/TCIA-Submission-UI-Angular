@@ -18,7 +18,7 @@
   <!-- https://mgonto.github.io/angular-wizard/ -->
 <div id="main_content_wrap" class="outer container">
       <h1>TCIA Submission Tool</h1>
-      <section id="main_content" class="inner main-inner" ng-app="wizard-sample" ng-controller="WizardCtrl">
+      <section id="main_content" class="inner main-inner" ng-app="tciaSubmissionApp" ng-controller="WizardCtrl">
         <wizard on-finish="finished()">
 
           <wz-step wz-title="Login" canexit="loginValidation">
@@ -31,8 +31,10 @@
                 <div class="form-group">
                     <label for="passwordInput">Password</label>
                     <input type="password" class="form-control" id='passwordInput' ng-model="user.password" style="max-width: 300px;"/>
-                  </div>
+                </div>
             </form>
+
+            <p style="font-style: italic">Credentials currently hardcoded to tcia & password</p>
 
             <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
 
@@ -106,16 +108,22 @@
       </section>
     </div>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
-<script src='angular-wizard/angular-wizard.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.3/angular-material.js'></script>
-<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='angular-wizard/angular-wizard.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.3/angular-material.js'></script>
+  <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
-<script  src="js/index.js"></script>
+
+  <script>
+      var app = angular.module('tciaSubmissionApp', ['mgo-angular-wizard']);
+  </script>
+
+  <script  src="js/index.js"></script>
+  <script  src="js/tciaService.js"></script>
 
 </body>
 </html>

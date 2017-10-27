@@ -1,5 +1,7 @@
-angular.module('wizard-sample', ['mgo-angular-wizard'])
-    .controller('WizardCtrl', function($scope, $q, $timeout, WizardHandler) {
+
+// var app = angular.module('tciaSubmissionApp', ['mgo-angular-wizard']);
+
+app.controller('WizardCtrl', function($scope, $q, $timeout, WizardHandler, tciaService) {
 
         $scope.canExit = true;
         $scope.stepActive = true;
@@ -22,10 +24,13 @@ angular.module('wizard-sample', ['mgo-angular-wizard'])
 
 
         $scope.loginValidation = function(){
-            //TODO: Move into seperate service file
-            return ($scope.user.username === 'tcia' && $scope.user.password === 'password')
+            return tciaService.checkCreds($scope.user.username, $scope.user.password);
         };
 
+        $scope.getXML = function(){
+            //Experiment with parsing XML in javascript
+            var xmlDoc = tciaService.getDicomFilesXML();
+        };
 
         $scope.finished = function() {
             alert("Wizard finished :)");
