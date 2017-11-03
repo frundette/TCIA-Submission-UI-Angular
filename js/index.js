@@ -19,7 +19,7 @@ app.controller('WizardCtrl', function($scope, $q, $timeout, WizardHandler, tciaS
         };
 
 
-        $scope.templateFileLocation;
+        $scope.submissionTemplateFile;
         $scope.deIdentifiedFileLocation;
 
 
@@ -27,9 +27,26 @@ app.controller('WizardCtrl', function($scope, $q, $timeout, WizardHandler, tciaS
             return tciaService.checkCreds($scope.user.username, $scope.user.password);
         };
 
+        $scope.importSubmissionTemplate = function(){
+            var file = document.getElementById('templateFile').files[0];
+
+            var promise = tciaService.sendCollectionInfo(file);
+
+            promise.then(function (response) {
+                //alert('success' + response);
+            }, function () {
+                alert('An error has occurred');
+            });
+        };
+
         $scope.getXML = function(){
-            //Experiment with parsing XML in javascript
-            var xmlDoc = tciaService.getDicomFilesXML();
+            var promise = tciaService.dicomXML();
+
+            promise.then(function (response) {
+                alert('success' + response);
+            }, function () {
+                alert('An error has occurred');
+            });
         };
 
         $scope.finished = function() {

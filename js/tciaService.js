@@ -1,10 +1,42 @@
-app.service('tciaService', function(){
+app.service('tciaService', function($http, $q){
     this.sayHello= function(text){
         return "Service says \"Hello " + text + "\"";
     };
 
     this.checkCreds = function(username, password){
         return (username === 'tcia' && password === 'password')
+    };
+
+    this.sendCollectionInfo = function(file){
+
+        var fileFormData = new FormData();
+        fileFormData.append('file', file);
+
+        var deffered = $q.defer();
+        $http.post('/Collection', fileFormData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+
+        }).success(function (response) {
+            deffered.resolve(response);
+        }).error(function (response) {
+            deffered.reject(response);
+        });
+
+        return deffered.promise;
+    };
+
+    this.dicomXML = function(){
+        var deffered = $q.defer();
+      $http.get('/Collection/listImport')
+          .success(function(response){
+              deffered.resolve(response);
+          })
+          .error(function(response){
+              deffered.reject(response);
+          });
+
+        return deffered.promise;
     };
 
     this.getDicomFilesXML = function(){

@@ -21,7 +21,7 @@
       <section id="main_content" class="inner main-inner" ng-app="tciaSubmissionApp" ng-controller="WizardCtrl">
         <wizard on-finish="finished()">
 
-          <wz-step wz-title="Login" canexit="loginValidation">
+          <!--<wz-step wz-title="Login" canexit="loginValidation">
             
             <form>
                 <div class="form-group">
@@ -38,25 +38,27 @@
 
             <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
 
-          </wz-step>
+          </wz-step>-->
 
           <wz-step wz-title="Configure">
              
-            <p>Fill out <a href='tcia-submission-template.csv'>this CSV template</a> and save it on your computer.  
+            <p>Fill out <a href='tcia-submission-template.xlsx'>this Excel template</a> and save it on your computer.
               Our software will use this information to determine which Collection your patients belong in, 
               and to replace your patient IDs and dates with anonymized ones.</p>
             
-            <p>After filling out the template, import the file: <input type="file" accept=".csv" class="form-control" ng-model="templateFileLocation" /></p>
+            <p>After filling out the template, import the file: <input type="file" accept=".xlsx" class="form-control" id="templateFile" /></p>
             
-            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
+            <button type="button" wz-next="importSubmissionTemplate()" class="btn btn-primary right">NEXT</button>
           </wz-step>
 
           <wz-step wz-title="Identify Data">
+
+            <button type="button" ng-click="getXML()">TESTING</button>
             
             <p>Now locate the DICOM data you’d like to submit. You can send data that’s stored on your hard drive or connect to your PACS.</p>
             <p>Submit from hard drive: <input type="file" class="form-control" multiple/></p>
-            <p>OR</p>
-            <p>Submit from PACS: <input type="button" value="Browse"/></p>
+            <!--<p>OR</p>-->
+            <!--<p>Submit from PACS: <input type="button" value="Browse"/></p>-->
 
             <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
             <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
@@ -122,8 +124,9 @@
       var app = angular.module('tciaSubmissionApp', ['mgo-angular-wizard']);
   </script>
 
-  <script  src="js/index.js"></script>
-  <script  src="js/tciaService.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/tciaService.js"></script>
+  <script src="js/fileModel.js"></script>
 
 </body>
 </html>
