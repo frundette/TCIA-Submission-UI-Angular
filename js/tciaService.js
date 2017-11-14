@@ -1,10 +1,17 @@
 app.service('tciaService', function($http, $q){
-    this.sayHello= function(text){
-        return "Service says \"Hello " + text + "\"";
-    };
 
-    this.checkCreds = function(username, password){
-        return (username === 'tcia' && password === 'password')
+
+    this.login = function(){
+        var deffered = $q.defer();
+        $http.get('/login/ajax?username=admin&password=password')
+            .success(function(response){
+                deffered.resolve(response);
+            })
+            .error(function(response){
+                deffered.reject(response);
+            });
+
+        return deffered.promise;
     };
 
     this.sendCollectionInfo = function(file){
@@ -26,9 +33,9 @@ app.service('tciaService', function($http, $q){
         return deffered.promise;
     };
 
-    this.dicomXML = function(){
+    this.collectionList = function(){
         var deffered = $q.defer();
-      $http.get('/Collection/listImport')
+        $http.get('/Collection/listImport')
           .success(function(response){
               deffered.resolve(response);
           })
@@ -39,24 +46,30 @@ app.service('tciaService', function($http, $q){
         return deffered.promise;
     };
 
-    this.getDicomFilesXML = function(){
+    this.anonymizeFiles = function(filepath){
+        var deffered = $q.defer();
+        $http.get('/Collection/anonymize?file=' + filepath)
+            .success(function(response){
+                deffered.resolve(response);
+            })
+            .error(function(response){
+                deffered.reject(response);
+            });
 
-        //TODO: Replace example with call to CTP
-        var dicomXML, parser, xmlDoc;
+        return deffered.promise;
 
-        dicomXML = '<DicomFiles>'+
-            '<dir name="DirectoryStorageService">'+
-            '<dir name="123-Bugs,Bunny">'+
-            '<dir name="20010312">' +
-            '<DicomObject Modality="CT" PatientID="1200824338" PatientName="Bunny,Bugs" StudyDate="20010312" name="999.1234567890"/>' +
-            '<DicomObject Modality="CT" PatientID="1200824338" PatientName="Bunny,Bugs" StudyDate="20010312" name="999.1234567890"/>' +
-            '</dir>' +
-            '</dir>' +
-            '</dir>' +
-            '</DicomFiles>';
-
-        parser = new DOMParser();
-        return parser.parseFromString(dicomXML,"text/xml");
     };
 
+    this.getAnonymizedFileList = function(){
+        var deffered = $q.defer();
+        $http.get('/Collection/listAnonymized')
+            .success(function(response){
+                deffered.resolve(response);
+            })
+            .error(function(response){
+                deffered.reject(response);
+            });
+
+        return deffered.promise;
+    };
 });

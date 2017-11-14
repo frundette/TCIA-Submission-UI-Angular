@@ -15,32 +15,16 @@
 </head>
 
 <body>
-  <!-- https://mgonto.github.io/angular-wizard/ -->
-<div id="main_content_wrap" class="outer container">
+
+  <div id="main_content_wrap" class="outer container">
       <h1>TCIA Submission Tool</h1>
+
       <section id="main_content" class="inner main-inner" ng-app="tciaSubmissionApp" ng-controller="WizardCtrl">
-        <wizard on-finish="finished()">
+        <div class="loader" ng-hide="loaded">Loading...</div>
+        <div class="ng-cloak">
+          <wizard ng-show="loggedIn" on-finish="finished()" >
 
-          <!--<wz-step wz-title="Login" canexit="loginValidation">
-            
-            <form>
-                <div class="form-group">
-                  <label for="usernameInput">Username</label>
-                  <input type="text" class="form-control" id='usernameInput' ng-model="user.username" style="max-width: 300px;"/>
-                </div>
-                <div class="form-group">
-                    <label for="passwordInput">Password</label>
-                    <input type="password" class="form-control" id='passwordInput' ng-model="user.password" style="max-width: 300px;"/>
-                </div>
-            </form>
-
-            <p style="font-style: italic">Credentials currently hardcoded to tcia & password</p>
-
-            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
-
-          </wz-step>-->
-
-          <wz-step wz-title="Configure">
+            <wz-step wz-title="Configure">
              
             <p>Fill out <a href='tcia-submission-template.xlsx'>this Excel template</a> and save it on your computer.
               Our software will use this information to determine which Collection your patients belong in, 
@@ -51,7 +35,7 @@
             <button type="button" wz-next="importSubmissionTemplate()" class="btn btn-primary right">NEXT</button>
           </wz-step>
 
-          <wz-step wz-title="Identify Data">
+            <wz-step wz-title="Identify Data">
 
             <button type="button" ng-click="getXML()">TESTING</button>
             
@@ -64,51 +48,57 @@
             <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
           </wz-step>
 
-          <wz-step wz-title="Process Data">
-            
-            <p>You have selected to de-identify XXX Gbytes/Tbytes of data from your PACS/HardDisk.</p>
-              
-            <p>Here is what will be de-identified:  <button type="button" class="btn btn-primary">Open Report</button></p>
-              
-            <p>Please select where you’d like the de-identified data to be saved: <input type="file" class="form-control" ng-model="deIdentifiedFileLocation"/> </p>
+            <wz-step wz-title="Process Data">
 
-            <p><input type="file" webkitdirectory mozdirectory msdirectory odirectory directory /></p>  multiple
+              <p>You have selected to de-identify XXX Gbytes/Tbytes of data from your PACS/HardDisk.</p>
 
-            <p>Be sure to verify you have enough free space before you proceed!</p>
+              <p>Here is what will be de-identified:  <button type="button" class="btn btn-primary">Open Report</button></p>
 
-            <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
-            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
-          </wz-step>
+              <p>Please select where you’d like the de-identified data to be saved: <input type="file" class="form-control" ng-model="deIdentifiedFileLocation"/> </p>
 
-          <wz-step wz-title="Transfer to TCIA">
-            
-            <p>Your data is now de-identified and stored at XXX.  
-              You can review the contents to resolve any quarantines or check for other issues if you like.  </p>
-                
-            <p>When you’re ready, press Next to transmit the following data to TCIA.  Any remaining quarantined files will not be sent.</p>
-                
-            <ul>
-                <li>Patients Received:  {{received.patientsReceived}}</li>
-                <li>Studies Received:  {{received.studiesReceived}} </li>
-                <li>Series Received:  {{received.seriesReceived}}</li>
-                <li>Quarantined Series: {{received.quarantinedSeries}}</li>
-            </ul>
-                
-            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
-            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
-          </wz-step>
+              <p><input type="file" webkitdirectory mozdirectory msdirectory odirectory directory /></p>  multiple
 
-          <wz-step wz-title="Finished">
-           
-            <p>Thanks for submitting your data.  Here’s a submission report to provide to TCIA staff.</p>
+              <p>Be sure to verify you have enough free space before you proceed!</p>
 
-            <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
-            <button type="button" wz-next="logStep()" class="btn btn-primary right" value="END">END</button>
+              <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
+              <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
+            </wz-step>
 
-          </wz-step>
-        </wizard>
+            <wz-step wz-title="Transfer to TCIA">
+
+              <p>Your data is now de-identified and stored at XXX.
+                You can review the contents to resolve any quarantines or check for other issues if you like.  </p>
+
+              <p>When you’re ready, press Next to transmit the following data to TCIA.  Any remaining quarantined files will not be sent.</p>
+
+              <ul>
+                  <li>Patients Received:  {{received.patientsReceived}}</li>
+                  <li>Studies Received:  {{received.studiesReceived}} </li>
+                  <li>Series Received:  {{received.seriesReceived}}</li>
+                  <li>Quarantined Series: {{received.quarantinedSeries}}</li>
+              </ul>
+
+              <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+              <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
+            </wz-step>
+
+            <wz-step wz-title="Finished">
+
+              <p>Thanks for submitting your data.  Here’s a submission report to provide to TCIA staff.</p>
+
+              <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
+              <button type="button" wz-next="logStep()" class="btn btn-primary right" value="END">END</button>
+
+            </wz-step>
+          </wizard>
+          <div ng-hide="loggedIn" class="alert alert-danger" role="alert">
+            There was a problem logging in.
+          </div>
+        </div>
       </section>
-    </div>
+
+  </div>
+
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
   <script src='angular-wizard/angular-wizard.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js'></script>
