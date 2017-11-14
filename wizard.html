@@ -6,9 +6,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
   
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.3/angular-material.css'>
-  <!-- <link rel='stylesheet prefetch' href='https://cdn.jsdelivr.net/angular.wizard/latest/angular-wizard.min.css'> -->
   <link rel='stylesheet prefetch' href='angular-wizard/angular-wizard.min.css'>
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <!--<link rel="stylesheet" href="jstree/themes/default/style.min.css" />-->
 
   <link rel="stylesheet" href="css/style.css">
 
@@ -43,23 +43,23 @@
             <!--<p>OR</p>-->
             <!--<p>Submit from PACS: <input type="button" value="Browse"/></p>-->
 
+              <p>Dev note: Servlet will copy the DICOM files into CTP/Collection/import/roots/DirectoryImportService/import </p>
+
             <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
             <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
           </wz-step>
 
             <wz-step wz-title="Process Data">
 
-              <p>You have selected to de-identify XXX Gbytes/Tbytes of data from your PACS/HardDisk.</p>
+              <p>Choose which directory to de-identify:</p>
 
-              <p>Here is what will be de-identified:  <button type="button" class="btn btn-primary">Open Report</button></p>
+              <p style="color: red; font-style: italic">TODO: Show data returned from XML.  Choose which level to de-identify</p>
 
-              <p>Please select where you’d like the de-identified data to be saved: <input type="file" class="form-control" ng-model="deIdentifiedFileLocation"/> </p>
+              <div id="jstree_demo_div"></div>
 
-              <p><input type="file" webkitdirectory mozdirectory msdirectory odirectory directory /></p>  multiple
+              <p>You have selected to de-identify XXX Gbytes/Tbytes of data.  Be sure to verify you have enough free space before you proceed!</p>
 
-              <p>Be sure to verify you have enough free space before you proceed!</p>
-
-              <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
+              <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
               <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
             </wz-step>
 
@@ -101,11 +101,8 @@
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
   <script src='angular-wizard/angular-wizard.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js'></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js'></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.3/angular-material.js'></script>
-  <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
 
