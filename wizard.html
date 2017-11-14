@@ -36,11 +36,10 @@
           </wz-step>
 
             <wz-step wz-title="Identify Data">
-
-            <button type="button" ng-click="getXML()">TESTING</button>
             
-            <p>Now locate the DICOM data you’d like to submit. You can send data that’s stored on your hard drive or connect to your PACS.</p>
-            <p>Submit from hard drive: <input type="file" class="form-control" multiple/></p>
+            <p>Now locate the DICOM data you’d like to submit. You can select a directory or a single file.</p>
+
+              <p style="color: red; font-style: italic">TODO: Display file system info</p>
             <!--<p>OR</p>-->
             <!--<p>Submit from PACS: <input type="button" value="Browse"/></p>-->
 
@@ -114,7 +113,7 @@
       var app = angular.module('tciaSubmissionApp', ['mgo-angular-wizard']);
   </script>
 
-  <script src="js/index.js"></script>
+  <script src="js/wizard.js"></script>
   <script src="js/tciaService.js"></script>
 
 </body>
