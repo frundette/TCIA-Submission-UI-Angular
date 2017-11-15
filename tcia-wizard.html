@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>TCIA Submission</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.3/angular-material.css'>
+    <link rel='stylesheet prefetch' href='angular-wizard/angular-wizard.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+    <div id="main_content_wrap" class="outer container">
+        <h1>TCIA Submission Tool</h1>
+
+
+        <div ng-app="app">
+            <div ng-controller="myController">
+
+                <div class="loader" ng-hide="loaded">Loading...</div>
+
+
+                <div class="ng-cloak">
+                    <wizard ng-show="loggedIn" on-finish="finished()" >
+
+                        <wz-step wz-title="Configure">
+
+                            <p>Fill out <a href='tcia-submission-template.xlsx'>this Excel template</a> and save it on your computer.
+                                Our software will use this information to determine which Collection your patients belong in,
+                                and to replace your patient IDs and dates with anonymized ones.</p>
+
+                            <p>After filling out the template, import the file: <input type="file" accept=".xlsx" class="form-control" id="templateFile" /></p>
+
+                            <button type="button" wz-next="importSubmissionTemplate()" class="btn btn-primary right">NEXT</button>
+                        </wz-step>
+
+                        <wz-step wz-title="Identify Data">
+
+                            <p>Now locate the DICOM data you’d like to submit. You can select a directory or a single file.</p>
+
+                            <p style="color: red; font-style: italic">TODO: Display file system info</p>
+
+                            <p>Dev note: Servlet will copy the DICOM files into CTP/Collection/import/roots/DirectoryImportService/import </p>
+
+                            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+                            <button type="button" wz-next="dicomCollectionList()" class="btn btn-primary right">NEXT</button>
+                        </wz-step>
+
+                        <wz-step wz-title="Process Data">
+
+                            <p>Choose which directory to de-identify:</p>
+
+                            <!--
+                              [TREE attribute]
+                              angular-treeview: the treeview directive
+                              tree-model : the tree model on $scope.
+                              node-id : each node's id
+                              node-label : each node's label
+                              node-children: each node's children
+                            -->
+                            <div data-angular-treeview="true"  data-tree-model="dirList"
+                                    data-node-id="name"  data-node-label="name" data-node-children="children" > </div>
+
+                            <div style="margin:10px 0 30px 0; padding:10px; background-color:#EEEEEE; border-radius:5px; font:12px Tahoma;">
+                                <span><b>Selected Directory</b> : {{currentNode.name}}</span>
+                            </div>
+
+                            <p>You have selected to de-identify XXX Gbytes/Tbytes of data.  Be sure to verify you have enough free space before you proceed!</p>
+
+                            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+                            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
+                        </wz-step>
+
+                        <wz-step wz-title="Transfer to TCIA">
+
+                            <p>Your data is now de-identified and stored at XXX.
+                                You can review the contents to resolve any quarantines or check for other issues if you like.  </p>
+
+                            <p>When you’re ready, press Next to transmit the following data to TCIA.  Any remaining quarantined files will not be sent.</p>
+
+                            <ul>
+                                <li>Patients Received:  {{received.patientsReceived}}</li>
+                                <li>Studies Received:  {{received.studiesReceived}} </li>
+                                <li>Series Received:  {{received.seriesReceived}}</li>
+                                <li>Quarantined Series: {{received.quarantinedSeries}}</li>
+                            </ul>
+
+                            <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
+                            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
+                        </wz-step>
+
+                        <wz-step wz-title="Finished">
+
+                            <p>Thanks for submitting your data.  Here’s a submission report to provide to TCIA staff.</p>
+
+                            <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
+                            <button type="button" wz-next="logStep()" class="btn btn-primary right" value="END">END</button>
+
+                        </wz-step>
+                    </wizard>
+                    <div ng-hide="loggedIn" class="alert alert-danger" role="alert">
+                        There was a problem logging in.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.3/angular-material.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='angular-wizard/angular-wizard.js'></script>
+
+
+
+<script>
+    var app = angular.module('app', ['mgo-angular-wizard', 'angularTreeview']);
+</script>
+
+
+<script src="js/wizard.js"></script>
+<script src="js/tciaService.js"></script>
