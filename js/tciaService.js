@@ -3,7 +3,7 @@ app.service('tciaService', function($http, $q){
 
     this.login = function(){
         var deffered = $q.defer();
-        $http.get('/login/ajax?username=admin&password=password')
+        $http.get('/login/ajax?username=admin&password=tcia')
             .success(function(response){
                 deffered.resolve(response);
             })
