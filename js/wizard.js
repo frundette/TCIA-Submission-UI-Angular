@@ -9,7 +9,7 @@ app.controller('myController', function($scope, WizardHandler, $q, $timeout, tci
     $scope.loggedIn = true;
     $scope.loaded = true;
 
-    tryLogin();
+    //tryLogin();
     function tryLogin(){
 
         var promise = tciaService.login();

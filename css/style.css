@@ -5,20 +5,29 @@
   background-color: #08f;
 }*/
 .steps-indicator li.done a:before {
-  background-color: #08f !important;
+  background-color: #60C2FC !important;
 }
 .steps-indicator li.current a:before {
-  background-color: #08f !important;
+  background-color: #60C2FC !important;
 }
 
 .steps-indicator {
   padding-bottom: 5em;
 }
 
+.steps {
+text-align: left;
+}
+
 .right {
   float: right;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #60C2FC;
+    border-color: #2e6da4;
+}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
