@@ -58,38 +58,49 @@
                             <button type="button" wz-next="importSubmissionTemplate()" class="btn btn-primary right">NEXT</button>
                         </wz-step>
 
-                        <wz-step wz-title="Identify Data">
+                        <wz-step wz-title="Prepare Data">
 
                             <p>Now locate the DICOM data you’d like to submit. You can select a directory or a single file.</p>
 
-                            <p style="color: red; font-style: italic">TODO: Display file system info</p>
+                            <ul style="color: red; font-style: italic">TODO:
+                                <li>Locate data on computer</li>
+                                <li>See summary of selected data</li>
+                                <li>All data selected by default, but user able to deselect unwanted items</li>
+                            </ul>
 
-                            <p>Dev note: Servlet will copy the DICOM files into CTP/Collection/import/roots/DirectoryImportService/import </p>
+                            <!--<p>Dev note: Servlet will copy the DICOM files into CTP/Collection/import/roots/DirectoryImportService/import </p>-->
 
                             <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
-                            <button type="button" wz-next="dicomCollectionList()" class="btn btn-primary right">NEXT</button>
+                            <button type="button" wz-next="dicomCollectionList()" class="btn btn-primary right">DE-IDENTIFY</button>
                         </wz-step>
 
-                        <wz-step wz-title="Process Data">
+                        <wz-step wz-title="Process & Review Data">
 
-                            <p>Choose which directory to de-identify:</p>
+                            <p style="color: red; font-style: italic">TODO: Progress bar or spinner</p>
 
-                            <!--
-                              [TREE attribute]
-                              angular-treeview: the treeview directive
-                              tree-model : the tree model on $scope.
-                              node-id : each node's id
-                              node-label : each node's label
-                              node-children: each node's children
-                            -->
-                            <div data-angular-treeview="true"  data-tree-model="dirList"
-                                    data-node-id="name"  data-node-label="name" data-node-children="children" > </div>
+                            <ul>
+                                <li>Patients Processed:  {{processed.patientsProcessed}}</li>
+                                <li>Studies Processed:  {{processed.studiesProcessed}} </li>
+                                <li>Series Process:  {{processed.seriesProcessed}}</li>
+                                <li>Quarantined Series: {{processed.quarantinedSeries}}</li>
+                            </ul>
 
-                            <div style="margin:10px 0 30px 0; padding:10px; background-color:#EEEEEE; border-radius:5px; font:12px Tahoma;">
-                                <span><b>Selected</b> : {{currentNode.name}}</span>
-                            </div>
+                            <!--&lt;!&ndash;-->
+                              <!--[TREE attribute]-->
+                              <!--angular-treeview: the treeview directive-->
+                              <!--tree-model : the tree model on $scope.-->
+                              <!--node-id : each node's id-->
+                              <!--node-label : each node's label-->
+                              <!--node-children: each node's children-->
+                            <!--&ndash;&gt;-->
+                            <!--<div data-angular-treeview="true"  data-tree-model="dirList"-->
+                                    <!--data-node-id="name"  data-node-label="name" data-node-children="children" > </div>-->
 
-                            <p>You have selected to de-identify XXX Gbytes/Tbytes of data.  Be sure to verify you have enough free space before you proceed!</p>
+                            <!--<div style="margin:10px 0 30px 0; padding:10px; background-color:#EEEEEE; border-radius:5px; font:12px Tahoma;">-->
+                                <!--<span><b>Selected</b> : {{currentNode.name}}</span>-->
+                            <!--</div>-->
+
+                            <!--<p>You have selected to de-identify XXX Gbytes/Tbytes of data.  Be sure to verify you have enough free space before you proceed!</p>-->
 
                             <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
                             <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
@@ -97,28 +108,20 @@
 
                         <wz-step wz-title="Transfer to TCIA">
 
-                            <p>Your data is now de-identified and stored at XXX.
-                                You can review the contents to resolve any quarantines or check for other issues if you like.  </p>
+                            <p>Your data is now de-identified. Click 'TRANSFER' to begin transmitting to TCIA.</p>
 
-                            <p>When you’re ready, press Next to transmit the following data to TCIA.  Any remaining quarantined files will not be sent.</p>
-
-                            <ul>
-                                <li>Patients Received:  {{received.patientsReceived}}</li>
-                                <li>Studies Received:  {{received.studiesReceived}} </li>
-                                <li>Series Received:  {{received.seriesReceived}}</li>
-                                <li>Quarantined Series: {{received.quarantinedSeries}}</li>
-                            </ul>
 
                             <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button>
-                            <button type="button" wz-next="logStep()" class="btn btn-primary right">NEXT</button>
+                            <button type="button" wz-next="logStep()" class="btn btn-primary right">TRANSFER</button>
                         </wz-step>
 
                         <wz-step wz-title="Finished">
 
-                            <p>Thanks for submitting your data.  Here’s a submission report to provide to TCIA staff.</p>
+                            <p>Thanks for submitting your data.</p>
+                            <p><a>Download the manifest</a> for your records.</p>
 
                             <!-- <button type="button" wz-previous="logStep()" class="btn btn-primary">BACK</button> -->
-                            <button type="button" wz-next="logStep()" class="btn btn-primary right" value="END">END</button>
+                            <!--<button type="button" wz-next="logStep()" class="btn btn-primary right" value="END">END</button>-->
 
                         </wz-step>
                     </wizard>
